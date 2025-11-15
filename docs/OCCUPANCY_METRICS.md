@@ -350,16 +350,69 @@ Typical performance ranges for state-of-the-art models:
 
 ## References
 
-1. **MonoScene**: "MonoScene: Monocular 3D Semantic Scene Completion" (CVPR 2022)
-2. **TPVFormer**: "Tri-Perspective View for Vision-Based 3D Semantic Occupancy Prediction" (CVPR 2023)
-3. **Occ3D**: "Occ3D: A Large-Scale 3D Occupancy Prediction Benchmark" (NeurIPS 2023)
-4. **SemanticKITTI**: "SemanticKITTI: A Dataset for Semantic Scene Understanding of LiDAR Sequences" (ICCV 2019)
-5. **SSCNet**: "Semantic Scene Completion from a Single Depth Image" (CVPR 2017)
+### Foundational Methods
 
----
+1. **SSCNet: Semantic Scene Completion from a Single Depth Image**
+   - Song, S., Yu, F., Zeng, A., Chang, A.X., Savva, M., & Funkhouser, T. (2017)
+   - CVPR 2017
+   - https://arxiv.org/abs/1611.08974
+   - https://doi.org/10.48550/arXiv.1611.08974
+   - First end-to-end 3D convolutional network for semantic scene completion from single depth image
 
-## Related Metrics
+2. **MonoScene: Monocular 3D Semantic Scene Completion**
+   - Cao, A.Q., & de Charette, R. (2022)
+   - CVPR 2022
+   - https://arxiv.org/abs/2112.00726
+   - https://github.com/astra-vision/MonoScene
+   - https://astra-vision.github.io/MonoScene/
+   - First method to predict 3D semantic occupancy from a single monocular RGB image
 
-- **Detection Metrics**: For object-level evaluation (see [DETECTION_METRICS.md](DETECTION_METRICS.md))
-- **Localization Metrics**: For ego-pose accuracy (see [LOCALIZATION_METRICS.md](LOCALIZATION_METRICS.md))
-- **Tracking Metrics**: For multi-object tracking (see [TRACKING_METRICS.md](TRACKING_METRICS.md))
+3. **TPVFormer: Tri-Perspective View for Vision-Based 3D Semantic Occupancy Prediction**
+   - Huang, Y., Zheng, W., Zhang, Y., Zhou, J., & Lu, J. (2023)
+   - CVPR 2023
+   - https://arxiv.org/abs/2302.07817
+   - https://doi.org/10.48550/arXiv.2302.07817
+   - https://github.com/wzzheng/TPVFormer
+   - https://wzzheng.net/TPVFormer/
+   - Introduces tri-perspective view representation to accompany BEV with perpendicular planes
+
+### Benchmarks and Datasets
+
+4. **SemanticKITTI: A Dataset for Semantic Scene Understanding of LiDAR Sequences**
+   - Behley, J., Garbade, M., Milioto, A., Quenzel, J., Behnke, S., Stachniss, C., & Gall, J. (2019)
+   - ICCV 2019
+   - https://arxiv.org/abs/1904.01416
+   - https://doi.org/10.48550/arXiv.1904.01416
+   - http://semantic-kitti.org/
+   - Large-scale LiDAR-based semantic segmentation and scene completion benchmark
+
+5. **Occ3D: A Large-Scale 3D Occupancy Prediction Benchmark for Autonomous Driving**
+   - Tian, X., Jiang, T., Yun, L., Mao, Y., Yang, H., Wang, Y., Wang, Y., & Zhao, H. (2023)
+   - NeurIPS 2023
+   - https://arxiv.org/abs/2304.14365
+   - https://doi.org/10.48550/arXiv.2304.14365
+   - https://github.com/Tsinghua-MARS-Lab/Occ3D
+   - https://tsinghua-mars-lab.github.io/Occ3D/
+   - Dense occupancy labels for nuScenes and Waymo datasets with 200×200×16 voxel resolution
+
+6. **nuScenes: A multimodal dataset for autonomous driving**
+   - Caesar, H., Bankiti, V., Lang, A.H., et al. (2020)
+   - CVPR 2020
+   - https://arxiv.org/abs/1903.11027
+   - https://www.nuscenes.org/
+   - Full sensor suite dataset used as base for Occ3D-nuScenes benchmark
+
+7. **Waymo Open Dataset: Scalable Autonomous Driving**
+   - Sun, P., Kretzschmar, H., Dotiwalla, X., et al. (2020)
+   - CVPR 2020
+   - https://arxiv.org/abs/1912.04838
+   - https://waymo.com/open
+   - Large-scale autonomous driving dataset used as base for Occ3D-Waymo benchmark
+
+## See Also
+
+- [DETECTION_METRICS.md](DETECTION_METRICS.md) - 3D object detection metrics
+- [LOCALIZATION_METRICS.md](LOCALIZATION_METRICS.md) - Ego-pose accuracy metrics
+- [TRACKING_METRICS.md](TRACKING_METRICS.md) - Multi-object tracking metrics
+- [VECTORMAP_METRICS.md](VECTORMAP_METRICS.md) - HD map prediction metrics
+- [METRICS_REFERENCE.md](METRICS_REFERENCE.md) - Quick reference for all metrics

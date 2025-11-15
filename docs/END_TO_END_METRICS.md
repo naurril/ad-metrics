@@ -814,17 +814,45 @@ def evaluate_end_to_end_model(model, test_scenarios):
 
 ## References
 
-1. **nuPlan**: Caesar, H., et al. "nuPlan: A closed-loop ML-based planning benchmark for autonomous vehicles." CVPR 2021.
+1. **nuPlan: A closed-loop ML-based planning benchmark for autonomous vehicles**
+   - Caesar, H., Kabzan, J., Tan, K.S., Fong, W.K., Wolff, E., Lang, A., Fletcher, L., Beijbom, O., & Omari, S. (2021)
+   - https://arxiv.org/abs/2106.11810
+   - https://www.nuscenes.org/nuplan
+   - 1200h driving data from 4 cities (Boston, Pittsburgh, Las Vegas, Singapore), closed-loop simulation framework
 
-2. **CARLA**: Dosovitskiy, A., et al. "CARLA: An open urban driving simulator." CoRL 2017.
+2. **CARLA: An open urban driving simulator**
+   - Dosovitskiy, A., Ros, G., Codevilla, F., Lopez, A., & Koltun, V. (2017)
+   - CoRL 2017
+   - https://arxiv.org/abs/1711.03938
+   - https://carla.org
+   - Open-source simulator for autonomous driving research
 
-3. **Waymo Open Dataset**: Sun, P., et al. "Scalability in perception for autonomous driving: Waymo open dataset." CVPR 2020.
+3. **Scalability in perception for autonomous driving: Waymo open dataset**
+   - Sun, P., Kretzschmar, H., Dotiwalla, X., Chouard, A., Patnaik, V., Tsui, P., Guo, J., Zhou, Y., Chai, Y., Caine, B., Vasudevan, V., Han, W., Ngiam, J., Zhao, H., Timofeev, A., Ettinger, S., Krivokon, M., Gao, A., Joshi, A., Zhang, Y., et al. (2020)
+   - CVPR 2020
+   - https://arxiv.org/abs/1912.04838
+   - https://waymo.com/open
+   - Large-scale dataset with 1,150 scenes, diverse urban/suburban environments, high-quality LiDAR and camera data
 
-4. **Argoverse 2**: Wilson, B., et al. "Argoverse 2: Next generation datasets for self-driving perception and forecasting." NeurIPS 2021.
+4. **Argoverse 2: Next generation datasets for self-driving perception and forecasting**
+   - Wilson, B., Qi, W., Agarwal, T., Lambert, J., Singh, J., Khandelwal, S., Pan, B., Kumar, R., Hartnett, A., Khandelwal, S., Pan, B., et al. (2023)
+   - NeurIPS 2021 Datasets and Benchmarks Track
+   - https://arxiv.org/abs/2301.00493
+   - https://argoverse.github.io/user-guide/
+   - Three datasets: Sensor Dataset (1,000 sequences), Lidar Dataset (20,000 sequences), Motion Forecasting Dataset (250,000 scenarios)
 
-5. **End-to-End Driving**: Hu, Y., et al. "Planning-oriented autonomous driving." CVPR 2023.
+5. **Planning-oriented autonomous driving (UniAD)**
+   - Hu, Y., Yang, J., Chen, L., Li, K., Sima, C., Zhu, X., Chai, S., Du, S., Lin, T., Wang, W., Lu, L., Jia, X., Liu, Q., Dai, J., Qiao, Y., & Li, H. (2023)
+   - CVPR 2023 (Award Candidate - Best Paper)
+   - https://arxiv.org/abs/2212.10156
+   - https://github.com/OpenDriveLab/UniAD
+   - Unified autonomous driving framework with hierarchical task planning (perception, prediction, planning)
 
-6. **Imitation Learning**: Codevilla, F., et al. "End-to-end driving via conditional imitation learning." ICRA 2018.
+6. **End-to-end driving via conditional imitation learning**
+   - Codevilla, F., Müller, M., López, A., Koltun, V., & Dosovitskiy, A. (2018)
+   - ICRA 2018
+   - https://arxiv.org/abs/1710.02410
+   - Imitation learning approach for autonomous driving
 
 ## See Also
 

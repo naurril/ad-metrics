@@ -4,19 +4,37 @@ Comprehensive metrics for evaluating HD map vector detection, focusing on lane l
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Metrics](#metrics)
-  - [Chamfer Distance (Polyline)](#chamfer-distance-polyline)
-  - [Fréchet Distance](#fréchet-distance)
-  - [Polyline IoU](#polyline-iou)
-  - [Lane Detection Metrics](#lane-detection-metrics)
-  - [Topology Metrics](#topology-metrics)
-  - [Endpoint Error](#endpoint-error)
-  - [Direction Accuracy](#direction-accuracy)
-  - [Vector Map AP](#vector-map-ap)
-- [Usage Examples](#usage-examples)
-- [Benchmark Datasets](#benchmark-datasets)
-- [References](#references)
+- [Vector Map Detection Metrics](#vector-map-detection-metrics)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+    - [Key Challenges](#key-challenges)
+    - [Evaluation Philosophy](#evaluation-philosophy)
+  - [Metrics](#metrics)
+    - [Chamfer Distance (Polyline)](#chamfer-distance-polyline)
+    - [Fréchet Distance](#fréchet-distance)
+    - [Polyline IoU](#polyline-iou)
+    - [Lane Detection Metrics](#lane-detection-metrics)
+    - [Topology Metrics](#topology-metrics)
+    - [Endpoint Error](#endpoint-error)
+    - [Direction Accuracy](#direction-accuracy)
+    - [Vector Map AP](#vector-map-ap)
+  - [Usage Examples](#usage-examples)
+    - [Complete Evaluation Pipeline](#complete-evaluation-pipeline)
+    - [Benchmark Comparison](#benchmark-comparison)
+  - [Benchmark Datasets](#benchmark-datasets)
+    - [1. nuScenes Map Expansion](#1-nuscenes-map-expansion)
+    - [2. Argoverse 2 HD Map](#2-argoverse-2-hd-map)
+    - [3. OpenLane-V2](#3-openlane-v2)
+    - [4. Waymo Open Dataset (Maps)](#4-waymo-open-dataset-maps)
+  - [Best Practices](#best-practices)
+    - [1. Metric Selection by Use Case](#1-metric-selection-by-use-case)
+    - [2. Threshold Selection](#2-threshold-selection)
+    - [3. Evaluation Pipeline](#3-evaluation-pipeline)
+  - [References](#references)
+    - [Papers](#papers)
+    - [Datasets](#datasets)
+    - [See Also](#see-also)
+  - [Summary](#summary)
 
 ---
 
@@ -751,38 +769,73 @@ def evaluate_vectormap_model(predictions, ground_truth):
 
 ### Papers
 
-1. **VectorNet** (2020)
+1. **VectorNet: Encoding HD Maps and Agent Dynamics from Vectorized Representation**
+   - Gao, J., Sun, C., Zhao, H., Shen, Y., Anguelov, D., Li, C., & Schmid, C. (2020)
+   - CVPR 2020
+   - https://arxiv.org/abs/2005.04259
+   - https://doi.org/10.48550/arXiv.2005.04259
    - Hierarchical graph neural network for vectorized HD maps
-   - Introduced polyline representation for lanes
+   - Introduced polyline representation for lanes and trajectory prediction
 
-2. **HDMapNet** (2021)
-   - Online HD map construction from sensor data
-   - Evaluated using Chamfer Distance and IoU
+2. **HDMapNet: An Online HD Map Construction and Evaluation Framework**
+   - Li, Q., Wang, Y., Wang, Y., & Zhao, H. (2022)
+   - International Conference on Robotics and Automation (ICRA) 2022
+   - https://arxiv.org/abs/2107.06307
+   - https://doi.org/10.48550/arXiv.2107.06307
+   - Online HD map construction from multi-view camera and LiDAR
+   - Evaluated using Chamfer Distance and IoU metrics
 
-3. **MapTR** (2022)
-   - Transformer-based vector map generation
-   - State-of-the-art on nuScenes and Argoverse
+3. **MapTR: Structured Modeling and Learning for Online Vectorized HD Map Construction**
+   - Liao, B., Chen, S., Wang, X., Cheng, T., Zhang, Q., Liu, W., & Huang, C. (2023)
+   - ICLR 2023 (Spotlight)
+   - https://arxiv.org/abs/2208.14437
+   - https://doi.org/10.48550/arXiv.2208.14437
+   - https://github.com/hustvl/MapTR
+   - Transformer-based end-to-end vectorized map construction
+   - State-of-the-art performance on nuScenes and Argoverse 2 datasets
+   - Unified permutation-equivalent modeling for map elements
 
-4. **TopoNet** (2023)
-   - Topology-aware lane detection
-   - Focus on connectivity and graph structure
-
-5. **LaneGAP** (2024)
-   - Graph attention for topology reasoning
-   - Improved successor/neighbor prediction
+4. **OpenLane-V2: A Topology Reasoning Benchmark for Unified 3D HD Mapping**
+   - Wang, H., Li, T., Li, Y., Chen, L., et al. (2023)
+   - NeurIPS 2023 Track Datasets and Benchmarks
+   - https://arxiv.org/abs/2304.10440
+   - https://github.com/OpenDriveLab/OpenLane-V2
+   - First perception and reasoning benchmark for scene structure
+   - Introduces 3D lane detection and topology reasoning tasks
 
 ### Datasets
 
-- **nuScenes Map Expansion**: https://www.nuscenes.org/nuscenes
-- **Argoverse 2**: https://www.argoverse.org/av2.html
-- **OpenLane-V2**: https://github.com/OpenDriveLab/OpenLane-V2
-- **Waymo Open Dataset**: https://waymo.com/open/
+5. **nuScenes: A multimodal dataset for autonomous driving**
+   - Caesar, H., Bankiti, V., Lang, A.H., Vora, S., Liong, V.E., Xu, Q., et al. (2020)
+   - CVPR 2020
+   - https://arxiv.org/abs/1903.11027
+   - https://www.nuscenes.org/
+   - 1000 scenes with 1.4M camera images, includes HD map annotations
+   - Standard benchmark for online HD map construction
 
-### Related Work
+6. **Argoverse 2: Next Generation Datasets for Self-Driving Perception and Forecasting**
+   - Wilson, B., Qi, W., Agarwal, T., Lambert, J., Singh, J., et al. (2023)
+   - NeurIPS 2023 Track Datasets and Benchmarks
+   - https://arxiv.org/abs/2301.00493
+   - https://www.argoverse.org/av2.html
+   - https://argoverse.github.io/user-guide/
+   - High-quality HD maps across 6 cities with detailed lane geometry
 
-- **Lane Detection**: Focus on image-space or BEV detection
-- **Semantic Segmentation**: Raster-based map representations
-- **Graph Neural Networks**: Topology reasoning and connectivity
+7. **Waymo Open Dataset: An autonomous driving dataset**
+   - Sun, P., Kretzschmar, H., Dotiwalla, X., Chouard, A., et al. (2020)
+   - CVPR 2020
+   - https://arxiv.org/abs/1912.04838
+   - https://waymo.com/open
+   - Large-scale dataset with 1,150 scenes, includes map features
+
+### See Also
+
+- [DETECTION_METRICS.md](DETECTION_METRICS.md) - 3D object detection metrics
+- [LOCALIZATION_METRICS.md](LOCALIZATION_METRICS.md) - Ego-pose accuracy metrics
+- [TRACKING_METRICS.md](TRACKING_METRICS.md) - Multi-object tracking metrics
+- [TRAJECTORY_PREDICTION.md](TRAJECTORY_PREDICTION.md) - Motion forecasting metrics
+- [OCCUPANCY_METRICS.md](OCCUPANCY_METRICS.md) - 3D occupancy prediction metrics
+- [METRICS_REFERENCE.md](METRICS_REFERENCE.md) - Quick reference for all metrics
 
 ---
 

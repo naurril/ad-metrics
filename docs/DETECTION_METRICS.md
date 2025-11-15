@@ -393,3 +393,69 @@ $$
 - Report multiple metrics for comprehensive comparison
 - Include error analysis at different distances
 - Consider computational cost vs. metric informativeness
+
+---
+
+## References
+
+### Datasets and Benchmarks
+
+1. **Are we ready for Autonomous Driving? The KITTI Vision Benchmark Suite**
+   - Geiger, A., Lenz, P., & Urtasun, R. (2012)
+   - CVPR 2012
+   - http://www.cvlibs.net/datasets/kitti/
+   - https://www.cvlibs.net/publications/Geiger2012CVPR.pdf
+   - Pioneering benchmark for stereo, optical flow, odometry, 3D object detection, and tracking
+
+2. **nuScenes: A multimodal dataset for autonomous driving**
+   - Caesar, H., Bankiti, V., Lang, A.H., Vora, S., Liong, V.E., Xu, Q., Krishnan, A., Pan, Y., Baldan, G., & Beijbom, O. (2020)
+   - CVPR 2020
+   - https://arxiv.org/abs/1903.11027
+   - https://www.nuscenes.org/
+   - Full sensor suite (6 cameras, 5 radars, 1 lidar), 1000 scenes with 3D bounding boxes for 23 classes, introduces NDS metric
+
+3. **Scalability in perception for autonomous driving: Waymo open dataset**
+   - Sun, P., Kretzschmar, H., Dotiwalla, X., Chouard, A., Patnaik, V., Tsui, P., Guo, J., Zhou, Y., Chai, Y., Caine, B., Vasudevan, V., Han, W., Ngiam, J., Zhao, H., Timofeev, A., Ettinger, S., Krivokon, M., Gao, A., Joshi, A., Zhang, Y., et al. (2020)
+   - CVPR 2020
+   - https://arxiv.org/abs/1912.04838
+   - https://waymo.com/open
+   - Large-scale dataset with 1,150 scenes, high-quality LiDAR and camera data, diverse urban/suburban environments
+
+4. **Microsoft COCO: Common Objects in Context**
+   - Lin, T.Y., Maire, M., Belongie, S., Bourdev, L., Girshick, R., Hays, J., Perona, P., Ramanan, D., Zitnick, C.L., & Dollár, P. (2014)
+   - ECCV 2014
+   - https://arxiv.org/abs/1405.0312
+   - https://cocodataset.org/
+   - Large-scale dataset with 2.5M labeled instances, defines standard AP metric computation for object detection
+
+### Detection Methods and Metrics
+
+5. **Focal Loss for Dense Object Detection (RetinaNet)**
+   - Lin, T.Y., Goyal, P., Girshick, R., He, K., & Dollár, P. (2017)
+   - ICCV 2017
+   - https://arxiv.org/abs/1708.02002
+   - https://github.com/facebookresearch/Detectron
+   - Introduces focal loss to address class imbalance, one-stage detector achieving high accuracy
+
+6. **PointPillars: Fast Encoders for Object Detection from Point Clouds**
+   - Lang, A.H., Vora, S., Caesar, H., Zhou, L., Yang, J., & Beijbom, O. (2019)
+   - CVPR 2019
+   - https://arxiv.org/abs/1812.05784
+   - Fast 3D detection using learned pillar representations, achieves 62-105 Hz on KITTI benchmark
+
+### Additional Datasets
+
+7. **The Cityscapes Dataset for Semantic Urban Scene Understanding**
+   - Cordts, M., Omran, M., Ramos, S., Rehfeld, T., Enzweiler, M., Benenson, R., Franke, U., Roth, S., & Schiele, B. (2016)
+   - CVPR 2016
+   - https://arxiv.org/abs/1604.01685
+   - https://www.cityscapes-dataset.com/
+   - Large-scale dataset for urban scene understanding with pixel-level and instance-level annotations
+
+## See Also
+
+- [TRACKING_METRICS.md](TRACKING_METRICS.md) - Multi-object tracking metrics (CLEAR MOT, HOTA, IDF1)
+- [TRAJECTORY_PREDICTION.md](TRAJECTORY_PREDICTION.md) - Motion forecasting metrics
+- [OCCUPANCY_METRICS.md](OCCUPANCY_METRICS.md) - 3D occupancy prediction metrics
+- [VECTORMAP_METRICS.md](VECTORMAP_METRICS.md) - HD map detection metrics
+- [METRICS_REFERENCE.md](METRICS_REFERENCE.md) - Quick reference for all metrics

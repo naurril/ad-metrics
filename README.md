@@ -55,6 +55,28 @@ Optional:
 - matplotlib >= 3.3.0 (visualization)
 - open3d >= 0.13.0 (3D visualization)
 
+## 📚 Documentation
+
+### API Reference
+
+Build the comprehensive API documentation locally:
+
+```bash
+cd docs
+./build_docs.sh
+```
+
+Then open `docs/_build/html/index.html` in your browser.
+
+The documentation includes:
+- **Automatic API Reference**: Generated from code docstrings for all 125+ metrics
+- **Conceptual Guides**: Detailed explanations of each metric category
+- **Usage Examples**: Code examples for every function
+- **Type Hints**: Full type annotation documentation
+- **Search**: Full-text search across all documentation
+
+See [`docs/README_DOCS.md`](docs/README_DOCS.md) for complete documentation building instructions.
+
 ## 🚀 Quick Start
 
 ### Detection Evaluation

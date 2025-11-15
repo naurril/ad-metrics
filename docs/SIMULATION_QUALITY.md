@@ -13,6 +13,8 @@ This document describes metrics for evaluating the quality and realism of simula
 7. [Temporal Consistency](#temporal-consistency)
 8. [Sim-to-Real Gap](#sim-to-real-gap)
 9. [Best Practices](#best-practices)
+10. [References](#references)
+11. [See Also](#see-also)
 
 ## Overview
 
@@ -508,15 +510,36 @@ Simulator: MetaDrive
 
 ## References
 
-1. **CARLA**: Dosovitskiy, A., et al. "CARLA: An open urban driving simulator." CoRL 2017.
+1. **CARLA: An Open Urban Driving Simulator**
+   - Dosovitskiy, A., Ros, G., Codevilla, F., Lopez, A., & Koltun, V. (2017)
+   - Conference on Robot Learning (CoRL) 2017
+   - https://arxiv.org/abs/1711.03938
+   - https://carla.org
+   - https://github.com/carla-simulator/carla
+   - Open-source simulator with flexible sensor configuration and evaluation metrics
 
-2. **Domain Randomization**: Tobin, J., et al. "Domain randomization for transferring deep neural networks from simulation to the real world." IROS 2017.
+2. **Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World**
+   - Tobin, J., Fong, R., Ray, A., Schneider, J., Zaremba, W., & Abbeel, P. (2017)
+   - IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) 2017
+   - https://arxiv.org/abs/1703.06907
+   - Techniques for improving sim-to-real transfer through randomization
 
-3. **Sim-to-Real Transfer**: Zhao, W., et al. "Sim-to-Real Transfer in Deep Reinforcement Learning for Robotics: a Survey." CASE 2020.
+3. **Sim-to-Real Transfer in Deep Reinforcement Learning for Robotics: a Survey**
+   - Zhao, W., Queralta, J. P., & Westerlund, T. (2020)
+   - IEEE Conference on Automation Science and Engineering (CASE) 2020
+   - https://arxiv.org/abs/2009.13303
+   - Comprehensive survey of simulation-to-reality transfer methods
 
-4. **LiDAR Simulation**: Fang, J., et al. "Simulating LiDAR Point Cloud for Autonomous Driving using Real-world Scenes." arXiv 2020.
+4. **Simulating LiDAR Point Cloud for Autonomous Driving using Real-world Scenes and Traffic Flows**
+   - Fang, J., Zhou, D., Yan, F., Zhao, T., Zhang, F., Ma, Y., Wang, L., & Yang, R. (2018)
+   - https://arxiv.org/abs/1811.07112
+   - Realistic LiDAR simulation for autonomous driving validation
 
-5. **Sensor Noise Modeling**: Kurup, A., et al. "Real-to-Sim: Predicting Residual Errors of Robotic Systems with Sparse Data using a Learning-based Unscented Kalman Filter." IROS 2021.
+5. **Real-to-Sim: Predicting Residual Errors of Robotic Systems with Sparse Data using a Learning-based Unscented Kalman Filter**
+   - Kurup, A., & Borrelli, F. (2021)
+   - IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) 2021
+   - https://arxiv.org/abs/2103.10403
+   - Learning-based approach for modeling sensor noise and errors
 
 ## See Also
 

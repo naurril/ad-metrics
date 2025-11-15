@@ -432,8 +432,36 @@ pytest tests/test_trajectory.py -v
 
 ## References
 
-1. **Argoverse**: Chang et al., "Argoverse: 3D Tracking and Forecasting with Rich Maps", CVPR 2019
-2. **nuScenes**: Phan-Minh et al., "CoverNet: Multimodal Behavior Prediction using Trajectory Sets", CVPR 2020
-3. **Waymo Open**: Ettinger et al., "Large Scale Interactive Motion Forecasting for Autonomous Driving", IROS 2021
-4. **TNT**: Zhao et al., "TNT: Target-driveN Trajectory Prediction", CoRL 2020
-5. **Trajectron++**: Salzmann et al., "Trajectron++: Dynamically-Feasible Trajectory Forecasting With Heterogeneous Data", ECCV 2020
+1. **Argoverse: 3D Tracking and Forecasting with Rich Maps**
+   - Chang, M.F., Lambert, J., Sangkloy, P., Singh, J., Bak, S., Hartnett, A., Wang, D., Carr, P., Lucey, S., Ramanan, D., & Hays, J. (2019)
+   - CVPR 2019
+   - https://arxiv.org/abs/1911.02620
+   - https://www.argoverse.org/av1.html
+   - 300,000+ tracked scenarios with HD maps for motion forecasting
+
+2. **CoverNet: Multimodal Behavior Prediction using Trajectory Sets** (nuScenes Prediction)
+   - Phan-Minh, T., Grigore, E.C., Boulton, F.A., Beijbom, O., & Wolff, E.M. (2020)
+   - CVPR 2020
+   - https://arxiv.org/abs/1911.10298
+   - https://www.nuscenes.org/prediction
+   - Classification-based approach to multimodal trajectory prediction
+
+3. **Large Scale Interactive Motion Forecasting for Autonomous Driving** (Waymo Open Motion)
+   - Ettinger, S., Cheng, S., Caine, B., Liu, C., Zhao, H., Pradhan, S., Chai, Y., Sapp, B., Qi, C.R., Zhou, Y., et al. (2021)
+   - IROS 2021
+   - https://arxiv.org/abs/2104.10133
+   - https://waymo.com/open/data/motion
+   - Interactive prediction with diverse agent types
+
+4. **TNT: Target-driveN Trajectory Prediction**
+   - Zhao, H., Gao, J., Lan, T., Sun, C., Sapp, B., Varadarajan, B., Shen, Y., Shen, Y., Chai, Y., Schmid, C., et al. (2020)
+   - CoRL 2020
+   - https://arxiv.org/abs/2008.08294
+   - Target-conditioned multimodal prediction
+
+5. **Trajectron++: Dynamically-Feasible Trajectory Forecasting With Heterogeneous Data**
+   - Salzmann, T., Ivanovic, B., Chakravarty, P., & Pavone, M. (2020)
+   - ECCV 2020
+   - https://arxiv.org/abs/2001.03093
+   - https://github.com/StanfordASL/Trajectron-plus-plus
+   - Graph-structured model with dynamic constraints and map integration

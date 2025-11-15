@@ -12,6 +12,8 @@ Comprehensive guide to ego vehicle localization metrics for evaluating pose esti
 - [Use Cases](#use-cases)
 - [Implementation Examples](#implementation-examples)
 - [Benchmark Compatibility](#benchmark-compatibility)
+- [References](#references)
+- [See Also](#see-also)
 
 ---
 
@@ -691,4 +693,75 @@ Localization metrics provide comprehensive evaluation of ego vehicle pose estima
 
 ---
 
-*Last Updated: November 14, 2025*
+
+## References
+
+### SLAM and Localization Systems
+
+1. **ORB-SLAM: A Versatile and Accurate Monocular SLAM System**
+   - Mur-Artal, R., Montiel, J.M.M., & Tardós, J.D. (2015)
+   - IEEE Transactions on Robotics (TRO), Vol. 31, No. 5
+   - https://arxiv.org/abs/1502.00956
+   - https://doi.org/10.1109/TRO.2015.2463671
+   - https://github.com/raulmur/ORB_SLAM
+   - Feature-based monocular SLAM with loop closing and relocalization
+
+2. **ORB-SLAM2: An Open-Source SLAM System for Monocular, Stereo and RGB-D Cameras**
+   - Mur-Artal, R., & Tardós, J.D. (2017)
+   - IEEE Transactions on Robotics (TRO), Vol. 33, No. 5
+   - https://arxiv.org/abs/1610.06475
+   - https://doi.org/10.1109/TRO.2017.2705103
+   - https://github.com/raulmur/ORB_SLAM2
+   - Complete SLAM system for multiple camera types, real-time operation
+
+3. **Past, Present, and Future of Simultaneous Localization and Mapping: Toward the Robust-Perception Age**
+   - Cadena, C., Carlone, L., Carrillo, H., Latif, Y., Scaramuzza, D., Neira, J., Reid, I., & Leonard, J.J. (2016)
+   - IEEE Transactions on Robotics (TRO), Vol. 32, No. 6
+   - https://arxiv.org/abs/1606.05830
+   - https://doi.org/10.1109/TRO.2016.2624754
+   - Comprehensive SLAM survey covering 30 years of progress, open challenges, and future directions
+
+### Datasets with Localization Ground Truth
+
+4. **KITTI Vision Benchmark Suite**
+   - Geiger, A., Lenz, P., & Urtasun, R. (2012)
+   - CVPR 2012
+   - http://www.cvlibs.net/datasets/kitti/
+   - https://www.cvlibs.net/publications/Geiger2012CVPR.pdf
+   - Odometry benchmark with high-precision GPS/INS ground truth for localization evaluation
+
+5. **nuScenes: A multimodal dataset for autonomous driving**
+   - Caesar, H., Bankiti, V., Lang, A.H., Vora, S., Liong, V.E., Xu, Q., Krishnan, A., Pan, Y., Baldan, G., & Beijbom, O. (2020)
+   - CVPR 2020
+   - https://arxiv.org/abs/1903.11027
+   - https://www.nuscenes.org/
+   - Full sensor suite with ego pose ground truth for localization benchmarking
+
+6. **Argoverse: 3D Tracking and Forecasting with Rich Maps**
+   - Chang, M.F., Lambert, J., Sangkloy, P., Singh, J., Bak, S., Hartnett, A., Wang, D., Carr, P., Lucey, S., Ramanan, D., & Hays, J. (2019)
+   - CVPR 2019
+   - https://arxiv.org/abs/1911.02620
+   - https://www.argoverse.org/av1.html
+   - HD maps and ego vehicle poses for map-based localization evaluation
+
+### Evaluation Metrics and Benchmarks
+
+7. **A Benchmark for the Evaluation of RGB-D SLAM Systems**
+   - Sturm, J., Engelhard, N., Endres, F., Burgard, W., & Cremers, D. (2012)
+   - IROS 2012
+   - https://vision.in.tum.de/data/datasets/rgbd-dataset
+   - Introduces ATE and RPE metrics widely used for SLAM/odometry evaluation
+
+8. **The EuRoC Micro Aerial Vehicle Datasets**
+   - Burri, M., Nikolic, J., Gohl, P., Schneider, T., Rehder, J., Omari, S., Achtelik, M.W., & Siegwart, R. (2016)
+   - International Journal of Robotics Research (IJRR), Vol. 35, No. 10
+   - http://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets
+   - Visual-inertial datasets with sub-centimeter ground truth for indoor/outdoor evaluation
+
+## See Also
+
+- [DETECTION_METRICS.md](DETECTION_METRICS.md) - 3D object detection metrics
+- [TRACKING_METRICS.md](TRACKING_METRICS.md) - Multi-object tracking metrics
+- [TRAJECTORY_PREDICTION.md](TRAJECTORY_PREDICTION.md) - Motion forecasting metrics
+- [END_TO_END_METRICS.md](END_TO_END_METRICS.md) - Planning and end-to-end driving metrics
+- [METRICS_REFERENCE.md](METRICS_REFERENCE.md) - Quick reference for all metrics

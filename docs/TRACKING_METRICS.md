@@ -270,6 +270,24 @@ pytest tests/test_tracking.py -v
 
 ## References
 
-1. **CLEAR MOT**: Bernardin & Stiefelhagen, "Evaluating Multiple Object Tracking Performance: The CLEAR MOT Metrics", EURASIP 2008
-2. **HOTA**: Luiten et al., "HOTA: A Higher Order Metric for Evaluating Multi-object Tracking", IJCV 2021
-3. **IDF1**: Ristani et al., "Performance Measures and a Data Set for Multi-Target, Multi-Camera Tracking", ECCV 2016
+1. **Evaluating Multiple Object Tracking Performance: The CLEAR MOT Metrics**
+   - Bernardin, K., & Stiefelhagen, R. (2008)
+   - EURASIP Journal on Image and Video Processing, 2008
+   - https://link.springer.com/article/10.1155/2008/246309
+   - https://doi.org/10.1155/2008/246309
+   - Introduced MOTA, MOTP, and foundational tracking metrics
+
+2. **HOTA: A Higher Order Metric for Evaluating Multi-Object Tracking**
+   - Luiten, J., Osep, A., Dendorfer, P., Torr, P., Geiger, A., Leal-Taixé, L., & Leibe, B. (2020)
+   - International Journal of Computer Vision (IJCV), 2020
+   - https://arxiv.org/abs/2009.07736
+   - https://github.com/JonathonLuiten/TrackEval
+   - https://doi.org/10.1007/s11263-020-01375-2
+   - Unified metric balancing detection, association, and localization
+
+3. **Performance Measures and a Data Set for Multi-Target, Multi-Camera Tracking**
+   - Ristani, E., Solera, F., Zou, R., Cucchiara, R., & Tomasi, C. (2016)
+   - ECCV 2016 Workshop on Benchmarking Multi-Target Tracking
+   - https://arxiv.org/abs/1609.01775
+   - https://github.com/ergysr/DeepCC
+   - Introduced IDF1 (ID F1 Score) for identity-preserving tracking
