@@ -355,9 +355,95 @@ class TestPerceptionSim2RealGap:
     
     def test_gap_basic(self):
         """Test basic sim-to-real gap computation."""
-        # perception_sim2real_gap expects dict format based on implementation
-        # Skip this test for now as the API is complex
-        pytest.skip("Perception sim2real gap requires specific dict format - see examples")
+        # Create simulation detections (better performance)
+        sim_detections = [
+            {
+                'predictions': np.array([
+                    [0, 0, 0, 4, 2, 1.5, 0],
+                    [5, 5, 0, 4, 2, 1.5, 0],
+                    [10, 10, 0, 4, 2, 1.5, 0],
+                ]),
+                'ground_truth': np.array([
+                    [0.2, 0.1, 0, 4, 2, 1.5, 0],
+                    [5.1, 5.2, 0, 4, 2, 1.5, 0],
+                    [10.3, 10.1, 0, 4, 2, 1.5, 0],
+                ])
+            }
+        ]
+        
+        # Create real-world detections (worse performance)
+        real_detections = [
+            {
+                'predictions': np.array([
+                    [0, 0, 0, 4, 2, 1.5, 0],
+                    [5, 5, 0, 4, 2, 1.5, 0],
+                ]),
+                'ground_truth': np.array([
+                    [0.2, 0.1, 0, 4, 2, 1.5, 0],
+                    [5.1, 5.2, 0, 4, 2, 1.5, 0],
+                    [10.3, 10.1, 0, 4, 2, 1.5, 0],
+                ])
+            }
+        ]
+        
+        gap = calculate_perception_sim2real_gap(
+            sim_detections, real_detections,
+            metrics=['precision', 'recall']
+        )
+        
+        assert 'precision_sim' in gap
+        assert 'precision_real' in gap
+        assert 'precision_gap' in gap
+        assert 'recall_sim' in gap
+        assert 'recall_real' in gap
+        assert 'recall_gap' in gap
+        assert 'performance_drop_pct' in gap
+        
+        # Simulation should have better performance
+        assert gap['recall_sim'] >= gap['recall_real']
+    
+    def test_gap_identical_performance(self):
+        """Test when sim and real have identical performance."""
+        detections = [
+            {
+                'predictions': np.array([
+                    [0, 0, 0, 4, 2, 1.5, 0],
+                    [5, 5, 0, 4, 2, 1.5, 0],
+                ]),
+                'ground_truth': np.array([
+                    [0.1, 0.1, 0, 4, 2, 1.5, 0],
+                    [5.1, 5.1, 0, 4, 2, 1.5, 0],
+                ])
+            }
+        ]
+        
+        gap = calculate_perception_sim2real_gap(
+            detections, detections,
+            metrics=['precision', 'recall']
+        )
+        
+        # Gaps should be near zero
+        assert abs(gap['precision_gap']) < 0.01
+        assert abs(gap['recall_gap']) < 0.01
+        assert abs(gap['performance_drop_pct']) < 1.0
+    
+    def test_gap_empty_detections(self):
+        """Test with empty detections."""
+        empty_detections = [
+            {
+                'predictions': np.array([]).reshape(0, 7),
+                'ground_truth': np.array([
+                    [0, 0, 0, 4, 2, 1.5, 0],
+                ])
+            }
+        ]
+        
+        gap = calculate_perception_sim2real_gap(
+            empty_detections, empty_detections
+        )
+        
+        # Should handle empty gracefully
+        assert 'precision_gap' in gap or 'recall_gap' in gap
 
 
 class TestEdgeCases:

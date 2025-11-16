@@ -7,7 +7,8 @@ import numpy as np
 from admetrics.detection.confusion import (
     calculate_tp_fp_fn,
     calculate_confusion_metrics,
-    calculate_confusion_matrix_multiclass
+    calculate_confusion_matrix_multiclass,
+    calculate_specificity
 )
 
 
@@ -139,6 +140,76 @@ class TestMultiClassConfusion:
             assert 'precision' in metrics
             assert 'recall' in metrics
             assert 'f1_score' in metrics
+
+
+class TestSpecificity:
+    """Test specificity metric."""
+    
+    def test_specificity_basic(self):
+        """Test basic specificity calculation."""
+        predictions = [
+            {'box': [0, 0, 0, 4, 2, 1.5, 0], 'score': 0.9, 'class': 'car'},
+            {'box': [100, 100, 0, 4, 2, 1.5, 0], 'score': 0.7, 'class': 'car'},  # FP
+        ]
+        ground_truth = [
+            {'box': [0, 0, 0, 4, 2, 1.5, 0], 'class': 'car'}
+        ]
+        
+        # Assume 1000 total negative samples
+        total_negatives = 1000
+        
+        specificity = calculate_specificity(
+            predictions, ground_truth, 
+            total_negatives=total_negatives,
+            iou_threshold=0.5
+        )
+        
+        # FP = 1, TN = 1000 - 1 = 999
+        # Specificity = TN / (TN + FP) = 999 / 1000 = 0.999
+        assert isinstance(specificity, float)
+        assert 0 <= specificity <= 1
+        assert np.isclose(specificity, 0.999, atol=0.001)
+    
+    def test_specificity_perfect(self):
+        """Test perfect specificity (no false positives)."""
+        predictions = [
+            {'box': [0, 0, 0, 4, 2, 1.5, 0], 'score': 0.9, 'class': 'car'}
+        ]
+        ground_truth = [
+            {'box': [0, 0, 0, 4, 2, 1.5, 0], 'class': 'car'}
+        ]
+        
+        total_negatives = 1000
+        
+        specificity = calculate_specificity(
+            predictions, ground_truth,
+            total_negatives=total_negatives
+        )
+        
+        # FP = 0, TN = 1000
+        # Specificity = 1.0
+        assert np.isclose(specificity, 1.0, atol=0.001)
+    
+    def test_specificity_all_false_positives(self):
+        """Test specificity when all predictions are false positives."""
+        predictions = [
+            {'box': [100, 100, 0, 4, 2, 1.5, 0], 'score': 0.9, 'class': 'car'},
+            {'box': [200, 200, 0, 4, 2, 1.5, 0], 'score': 0.8, 'class': 'car'},
+        ]
+        ground_truth = [
+            {'box': [0, 0, 0, 4, 2, 1.5, 0], 'class': 'car'}
+        ]
+        
+        total_negatives = 100
+        
+        specificity = calculate_specificity(
+            predictions, ground_truth,
+            total_negatives=total_negatives
+        )
+        
+        # FP = 2, TN = 100 - 2 = 98
+        # Specificity = 98 / 100 = 0.98
+        assert np.isclose(specificity, 0.98, atol=0.001)
 
 
 if __name__ == "__main__":

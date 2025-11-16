@@ -81,11 +81,11 @@ def plot_boxes_bev(
     boxes: List[np.ndarray],
     labels: Optional[List[str]] = None,
     colors: Optional[List[str]] = None,
-    ax: Optional[plt.Axes] = None,
+    ax: Optional['plt.Axes'] = None,
     show: bool = True,
     x_range: Optional[Tuple[float, float]] = None,
     y_range: Optional[Tuple[float, float]] = None
-) -> plt.Axes:
+) -> 'plt.Axes':
     """
     Plot Bird's Eye View of 3D boxes.
     
@@ -155,9 +155,9 @@ def plot_precision_recall_curve(
     recall: np.ndarray,
     ap: float,
     title: str = "Precision-Recall Curve",
-    ax: Optional[plt.Axes] = None,
+    ax: Optional['plt.Axes'] = None,
     show: bool = True
-) -> plt.Axes:
+) -> 'plt.Axes':
     """
     Plot precision-recall curve.
     
