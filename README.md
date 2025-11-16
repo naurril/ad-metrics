@@ -2,26 +2,27 @@
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Tests](https://img.shields.io/badge/tests-304%20passed-brightgreen.svg)](tests/)
-[![Coverage](https://img.shields.io/badge/coverage-80%25-green.svg)](tests/)
+[![Tests](https://img.shields.io/badge/tests-374%20passed-brightgreen.svg)](tests/)
+[![Coverage](https://img.shields.io/badge/coverage-92%25-green.svg)](tests/)
 
-A comprehensive Python library for evaluating autonomous driving perception and planning systems across **125+ metrics** in 9 categories: detection, tracking, trajectory prediction, localization, occupancy, planning, vector maps, simulation quality, and utilities.
+A comprehensive Python library for evaluating autonomous driving perception and planning systems across **89 metric functions** (165+ individual metrics) in 9 categories: detection, tracking, trajectory prediction, localization, occupancy, planning, vector maps, simulation quality, and utilities.
 
 ## 🚀 Features
 
 ### 📊 Complete Metric Coverage
 
-| Category | Metrics | Key Features |
-|----------|---------|--------------|
-| **Detection** | 25 | IoU (3D/BEV/GIoU), AP, mAP, NDS, AOS, Distance/Orientation Errors |
-| **Tracking** | 14 | MOTA, MOTP, HOTA, IDF1, ID Switches, Fragmentations |
-| **Trajectory Prediction** | 11 | ADE, FDE, minADE/minFDE, NLL, Brier-FDE, Safety Metrics |
-| **Localization** | 8 | ATE, RTE, ARE, Lateral/Longitudinal Errors, Map Alignment |
-| **Occupancy** | 10 | mIoU, Scene Completion, Chamfer Distance, Precision/Recall |
-| **Planning** | 12 | L2 Distance, Collision Rate, Driving Score, Comfort Metrics |
-| **Vector Maps** | 8 | Chamfer/Fréchet Distance, Topology, Lane Detection, AP |
-| **Simulation Quality** | 29 | Camera/LiDAR/Radar Quality, Noise, Temporal, Sim2Real Gap |
-| **Utilities** | 8+ | Matching, NMS, Transforms, Visualization |
+| Category | Functions | Metric Outputs | Key Features |
+|----------|-----------|----------------|--------------|
+| **Detection** | 24 | 40+ metrics | IoU (3D/BEV/GIoU), AP, mAP, NDS, AOS, Confusion, Distance Errors |
+| **Tracking** | 6 | 15+ metrics | MOTA, MOTP, HOTA, IDF1, ID Switches, Fragmentations |
+| **Trajectory Prediction** | 10 | 10+ metrics | ADE, FDE, minADE/minFDE, NLL, Brier-FDE, Collision Rate |
+| **Localization** | 8 | 25+ metrics | ATE, RTE, ARE, Lateral/Longitudinal Errors, Drift Analysis |
+| **Occupancy** | 6 | 15+ metrics | mIoU, Precision/Recall, Chamfer Distance, Scene Completion |
+| **Planning** | 11 | 20+ metrics | L2 Distance, Collision, Progress, Comfort, Driving Score |
+| **Vector Maps** | 8 | 15+ metrics | Chamfer/Fréchet Distance, Topology, Lane Detection, Boundary IoU |
+| **Simulation Quality** | 7 | 25+ metrics | Camera/LiDAR/Radar Quality, Noise, Temporal, Sim2Real Gap |
+| **Utilities** | 9 | - | Matching (Greedy/Hungarian), NMS, Transforms, Visualization |
+| **TOTAL** | **89** | **165+** | Comprehensive autonomous driving evaluation metrics |
 
 ### 🎯 Benchmark Support
 
@@ -69,7 +70,7 @@ cd docs
 Then open `docs/_build/html/index.html` in your browser.
 
 The documentation includes:
-- **Automatic API Reference**: Generated from code docstrings for all 125+ metrics
+- **Automatic API Reference**: Generated from code docstrings for all 89 metric functions (165+ metrics)
 - **Conceptual Guides**: Detailed explanations of each metric category
 - **Usage Examples**: Code examples for every function
 - **Type Hints**: Full type annotation documentation
@@ -214,16 +215,16 @@ print(f"Collision Rate: {collision:.2%}")
 ```
 ad-metrics/
 ├── admetrics/              # Main package
-│   ├── detection/         # 3D detection (25 metrics, 94% coverage)
-│   ├── tracking/          # MOT (14 metrics, 89% coverage)
-│   ├── prediction/        # Trajectory (11 metrics, 95% coverage)
-│   ├── localization/      # Ego pose (8 metrics, 91% coverage)
-│   ├── occupancy/         # Voxel grids (10 metrics, 98% coverage)
-│   ├── planning/          # End-to-end (12 metrics, 95% coverage)
-│   ├── vectormap/         # HD maps (8 metrics, 98% coverage)
-│   ├── simulation/        # Sensor quality (29 metrics, 66% coverage)
-│   └── utils/             # Matching, NMS, transforms
-├── tests/                  # 304 tests, 80% coverage
+│   ├── detection/         # 3D detection (24 functions, 94% coverage)
+│   ├── tracking/          # MOT (6 functions, 89% coverage)
+│   ├── prediction/        # Trajectory (10 functions, 95% coverage)
+│   ├── localization/      # Ego pose (8 functions, 91% coverage)
+│   ├── occupancy/         # Voxel grids (6 functions, 98% coverage)
+│   ├── planning/          # End-to-end (11 functions, 95% coverage)
+│   ├── vectormap/         # HD maps (8 functions, 98% coverage)
+│   ├── simulation/        # Sensor quality (7 functions, 91% coverage)
+│   └── utils/             # Matching, NMS, transforms (9 functions)
+├── tests/                  # 374 tests, 92% coverage
 ├── examples/               # 10 example scripts
 ├── docs/                   # Comprehensive documentation
 └── README.md
@@ -231,7 +232,7 @@ ad-metrics/
 
 ## ✅ Testing
 
-**Current Status: 304 passing tests, 2 skipped, 80% code coverage**
+**Current Status: 374 passing tests, 2 skipped, 92% code coverage, 100% metric function coverage**
 
 Run all tests:
 ```bash
@@ -252,23 +253,26 @@ pytest tests/test_localization.py -v
 
 ### Test Coverage by Module
 
-| Module | Tests | Coverage |
-|--------|-------|----------|
-| `detection/iou.py` | 14 | 91% |
-| `detection/ap.py` | 9 | 98% |
-| `detection/nds.py` | 5 | 96% |
-| `detection/aos.py` | 18 | 96% |
-| `detection/distance.py` | 31 | 94% |
-| `detection/confusion.py` | 5 | 90% |
-| `tracking/tracking.py` | 16 | 89% |
-| `prediction/trajectory.py` | 26 | 95% |
-| `localization/localization.py` | 27 | 91% |
-| `occupancy/occupancy.py` | 39 | 98% |
-| `planning/planning.py` | 42 | 95% |
-| `vectormap/vectormap.py` | 45 | 98% |
-| `simulation/sensor_quality.py` | 17 | 66% |
-| `utils/*` | 12 | 50% |
-| **Total** | **304** | **80%** |
+| Module | Tests | Functions | Coverage |
+|--------|-------|-----------|----------|
+| `detection/iou.py` | 14 | 4 | 91% |
+| `detection/ap.py` | 9 | 4 | 98% |
+| `detection/nds.py` | 5 | 3 | 96% |
+| `detection/aos.py` | 18 | 4 | 96% |
+| `detection/distance.py` | 31 | 6 | 94% |
+| `detection/confusion.py` | 8 | 4 | 96% |
+| `tracking/tracking.py` | 16 | 6 | 89% |
+| `prediction/trajectory.py` | 26 | 10 | 95% |
+| `localization/localization.py` | 27 | 8 | 91% |
+| `occupancy/occupancy.py` | 39 | 6 | 98% |
+| `planning/planning.py` | 42 | 11 | 95% |
+| `vectormap/vectormap.py` | 45 | 8 | 98% |
+| `simulation/sensor_quality.py` | 20 | 7 | 91% |
+| `utils/visualization.py` | 35 | - | 91% |
+| `utils/matching.py` | 6 | - | 74% |
+| `utils/nms.py` | 8 | - | 88% |
+| `utils/transforms.py` | 11 | - | 95% |
+| **Total** | **374** | **89** | **92%** |
 
 ## 🤝 Contributing
 

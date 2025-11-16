@@ -2,8 +2,6 @@
 
 Complete reference of all 80 exported metric calculation interfaces in the `admetrics` library.
 
-**Version:** 0.1.0 | **Repository:** https://github.com/naurril/ad-metrics | **Last Updated:** November 16, 2025
-
 ---
 
 ## Summary

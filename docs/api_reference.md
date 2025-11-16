@@ -2,8 +2,6 @@
 
 Complete API documentation for the admetrics library - a comprehensive metrics suite for autonomous driving evaluation.
 
-**Version:** 0.1.0 | **Repository:** https://github.com/naurril/ad-metrics | **Total Functions:** 80
-
 ## Quick Navigation
 
 - [Detection Metrics (24)](#detection-metrics)
@@ -1620,38 +1618,3 @@ Bird's Eye View Non-Maximum Suppression.
 <li><code>nms_3d</code> - 3D NMS</li>
 <li><code>nms_bev</code> - BEV NMS</li>
 </ol>
-
----
-
-## Installation & Usage
-
-```bash
-pip install admetrics
-```
-
-```python
-import admetrics as adm
-import numpy as np
-
-# Detection evaluation
-box1 = [0, 0, 0, 4, 2, 1.5, 0]
-box2 = [1, 0, 0, 4, 2, 1.5, 0]
-iou = adm.calculate_iou_3d(box1, box2)
-
-# Trajectory prediction evaluation
-pred_traj = np.array([[0, 0], [1, 1], [2, 2]])
-gt_traj = np.array([[0, 0], [1.1, 0.9], [2.2, 1.8]])
-ade = adm.calculate_ade(pred_traj, gt_traj)
-fde = adm.calculate_fde(pred_traj, gt_traj)
-
-# Occupancy evaluation
-pred_occ = np.random.randint(0, 3, (50, 50, 10))
-gt_occ = np.random.randint(0, 3, (50, 50, 10))
-result = adm.calculate_mean_iou(pred_occ, gt_occ, num_classes=3)
-```
-
----
-
-**Documentation:** https://github.com/naurril/ad-metrics/docs  
-**Issues:** https://github.com/naurril/ad-metrics/issues  
-**License:** MIT
