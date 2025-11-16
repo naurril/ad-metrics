@@ -2,6 +2,34 @@
 
 This document provides an overview of the multi-object tracking (MOT) metrics implemented in `admetrics`.
 
+## Table of Contents
+
+- [Multi-Object Tracking Metrics](#multi-object-tracking-metrics)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Metrics](#metrics)
+    - [1. CLEAR MOT Metrics](#1-clear-mot-metrics)
+      - [MOTA (Multiple Object Tracking Accuracy)](#mota-multiple-object-tracking-accuracy)
+      - [MOTP (Multiple Object Tracking Precision)](#motp-multiple-object-tracking-precision)
+    - [2. HOTA (Higher Order Tracking Accuracy)](#2-hota-higher-order-tracking-accuracy)
+    - [3. IDF1 (ID F1 Score)](#3-idf1-id-f1-score)
+  - [Additional Metrics](#additional-metrics)
+    - [Trajectory Classification](#trajectory-classification)
+    - [Fragmentations](#fragmentations)
+  - [Metric Comparison](#metric-comparison)
+  - [Choosing the Right Metric](#choosing-the-right-metric)
+  - [Common Patterns](#common-patterns)
+    - [Perfect Tracking](#perfect-tracking)
+    - [ID Switch Detection](#id-switch-detection)
+    - [Fragmentation Detection](#fragmentation-detection)
+  - [Implementation Details](#implementation-details)
+    - [Matching Algorithm](#matching-algorithm)
+    - [ID Switch Detection](#id-switch-detection-1)
+    - [Fragmentation Counting](#fragmentation-counting)
+  - [Examples](#examples)
+  - [Testing](#testing)
+  - [References](#references)
+
 ## Overview
 
 The tracking module (`admetrics.tracking`) provides comprehensive metrics for evaluating 3D multi-object tracking systems. These metrics go beyond single-frame detection to measure temporal consistency, identity preservation, and trajectory quality.

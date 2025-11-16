@@ -2,6 +2,38 @@
 
 This document describes the metrics for evaluating 3D semantic occupancy prediction models in autonomous driving.
 
+## Table of Contents
+
+- [3D Occupancy Prediction Metrics](#3d-occupancy-prediction-metrics)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Metrics Categories](#metrics-categories)
+    - [1. Voxel-wise Classification Metrics](#1-voxel-wise-classification-metrics)
+      - [Intersection over Union (IoU)](#intersection-over-union-iou)
+      - [Mean Intersection over Union (mIoU)](#mean-intersection-over-union-miou)
+      - [Precision, Recall, and F1-Score](#precision-recall-and-f1-score)
+    - [2. Scene Completion Metrics](#2-scene-completion-metrics)
+      - [Scene Completion IoU (SC-IoU)](#scene-completion-iou-sc-iou)
+      - [Semantic Scene Completion mIoU (SSC-mIoU)](#semantic-scene-completion-miou-ssc-miou)
+      - [Completion Ratio](#completion-ratio)
+    - [3. Geometric Quality Metrics](#3-geometric-quality-metrics)
+      - [Chamfer Distance (CD)](#chamfer-distance-cd)
+      - [Surface Distance (SD)](#surface-distance-sd)
+  - [Benchmark Datasets](#benchmark-datasets)
+    - [nuScenes-Occupancy](#nuscenes-occupancy)
+    - [SemanticKITTI](#semantickitti)
+    - [Occ3D](#occ3d)
+  - [Best Practices](#best-practices)
+    - [1. Metric Selection](#1-metric-selection)
+    - [2. Evaluation Protocol](#2-evaluation-protocol)
+    - [3. Common Pitfalls](#3-common-pitfalls)
+  - [Example: Complete Evaluation](#example-complete-evaluation)
+  - [Performance Benchmarks](#performance-benchmarks)
+  - [References](#references)
+    - [Foundational Methods](#foundational-methods)
+    - [Benchmarks and Datasets](#benchmarks-and-datasets)
+  - [See Also](#see-also)
+
 ## Overview
 
 3D occupancy prediction involves predicting which voxels in a 3D grid around the vehicle are occupied and their semantic classes (e.g., vehicle, pedestrian, road, building). This is a fundamental task for scene understanding and planning in autonomous driving.

@@ -2,6 +2,38 @@
 
 This document provides comprehensive coverage of trajectory prediction metrics implemented in `admetrics`.
 
+## Table of Contents
+
+- [Trajectory Prediction Metrics](#trajectory-prediction-metrics)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Core Displacement Metrics](#core-displacement-metrics)
+    - [1. ADE (Average Displacement Error)](#1-ade-average-displacement-error)
+    - [2. FDE (Final Displacement Error)](#2-fde-final-displacement-error)
+    - [3. Miss Rate (MR)](#3-miss-rate-mr)
+  - [Multi-Modal Prediction Metrics](#multi-modal-prediction-metrics)
+    - [4. minADE (Minimum ADE)](#4-minade-minimum-ade)
+    - [5. minFDE (Minimum FDE)](#5-minfde-minimum-fde)
+  - [Probabilistic Metrics](#probabilistic-metrics)
+    - [6. Brier-FDE](#6-brier-fde)
+    - [7. NLL (Negative Log-Likelihood)](#7-nll-negative-log-likelihood)
+  - [Safety and Constraint Metrics](#safety-and-constraint-metrics)
+    - [8. Collision Rate](#8-collision-rate)
+    - [9. Drivable Area Compliance](#9-drivable-area-compliance)
+  - [Comprehensive Metrics](#comprehensive-metrics)
+    - [10. calculate\_trajectory\_metrics()](#10-calculate_trajectory_metrics)
+  - [Metrics Comparison](#metrics-comparison)
+  - [Benchmark Standards](#benchmark-standards)
+    - [Argoverse Motion Forecasting](#argoverse-motion-forecasting)
+    - [nuScenes Prediction](#nuscenes-prediction)
+    - [Waymo Open Motion Dataset](#waymo-open-motion-dataset)
+  - [Best Practices](#best-practices)
+    - [Choosing Metrics](#choosing-metrics)
+    - [Common Pitfalls](#common-pitfalls)
+  - [Examples](#examples)
+  - [Testing](#testing)
+  - [References](#references)
+
 ## Overview
 
 The trajectory prediction module (`admetrics.trajectory`) provides metrics for evaluating predicted future trajectories of dynamic objects (vehicles, pedestrians, cyclists). These are essential for motion forecasting models in autonomous driving.
