@@ -186,5 +186,96 @@ class TestPrecisionRecallCurve:
         assert all(0 <= r <= 1 for r in recall)
 
 
+class TestMAPEdgeCases:
+    """Test mAP edge cases."""
+
+    def test_no_predictions(self):
+        """Test mAP with no predictions."""
+        predictions = []
+        ground_truth = [
+            {'box': [0, 0, 0, 4, 2, 1.5, 0], 'class': 'car'},
+        ]
+        result = calculate_map(
+            predictions=predictions,
+            ground_truth=ground_truth,
+            class_names=['car'],
+            iou_thresholds=0.5
+        )
+        assert result['mAP'] == 0.0
+
+    def test_no_ground_truth(self):
+        """Test mAP with no ground truth."""
+        predictions = [
+            {'box': [0, 0, 0, 4, 2, 1.5, 0], 'score': 0.9, 'class': 'car'},
+        ]
+        ground_truth = []
+        result = calculate_map(
+            predictions=predictions,
+            ground_truth=ground_truth,
+            class_names=['car'],
+            iou_thresholds=0.5
+        )
+        assert result['mAP'] == 0.0
+
+    def test_no_predictions_no_ground_truth(self):
+        """Test mAP with no predictions and no ground truth."""
+        predictions = []
+        ground_truth = []
+        result = calculate_map(
+            predictions=predictions,
+            ground_truth=ground_truth,
+            class_names=['car'],
+            iou_thresholds=0.5
+        )
+        assert result['mAP'] == 0.0
+
+    def test_missing_score(self):
+        """Test mAP with missing score in predictions."""
+        predictions = [
+            {'box': [0, 0, 0, 4, 2, 1.5, 0], 'class': 'car'},
+        ]
+        ground_truth = [
+            {'box': [0, 0, 0, 4, 2, 1.5, 0], 'class': 'car'},
+        ]
+        with pytest.raises(ValueError):
+            calculate_map(
+                predictions=predictions,
+                ground_truth=ground_truth,
+                class_names=['car'],
+                iou_thresholds=0.5
+            )
+
+    def test_missing_box(self):
+        """Test mAP with missing box in predictions."""
+        predictions = [
+            {'score': 0.9, 'class': 'car'},
+        ]
+        ground_truth = [
+            {'box': [0, 0, 0, 4, 2, 1.5, 0], 'class': 'car'},
+        ]
+        with pytest.raises(ValueError):
+            calculate_map(
+                predictions=predictions,
+                ground_truth=ground_truth,
+                class_names=['car'],
+                iou_thresholds=0.5
+            )
+
+    def test_missing_class(self):
+        """Test mAP with missing class in predictions."""
+        predictions = [
+            {'box': [0, 0, 0, 4, 2, 1.5, 0], 'score': 0.9},
+        ]
+        ground_truth = [
+            {'box': [0, 0, 0, 4, 2, 1.5, 0], 'class': 'car'},
+        ]
+        with pytest.raises(ValueError):
+            calculate_map(
+                predictions=predictions,
+                ground_truth=ground_truth,
+                class_names=['car'],
+                iou_thresholds=0.5
+            )
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

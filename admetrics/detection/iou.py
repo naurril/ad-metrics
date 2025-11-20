@@ -310,6 +310,36 @@ def calculate_iou_batch(
     return ious
 
 
+def _get_3d_corners(box: np.ndarray, box_format: str = "xyzwhlr") -> np.ndarray:
+    """Get the 8 corners of a 3D bounding box."""
+    x, y, z = box[0], box[1], box[2]
+    
+    if box_format == "xyzwhlr":
+        w, h, l, r = box[3], box[4], box[5], box[6]
+    else:  # xyzhwlr
+        h, w, l, r = box[3], box[4], box[5], box[6]
+
+    # 3D corners in local frame
+    corners_local = np.array([
+        [l/2, w/2, h/2], [l/2, w/2, -h/2], [l/2, -w/2, h/2], [l/2, -w/2, -h/2],
+        [-l/2, w/2, h/2], [-l/2, w/2, -h/2], [-l/2, -w/2, h/2], [-l/2, -w/2, -h/2]
+    ])
+
+    # Rotation matrix for yaw
+    cos_r, sin_r = np.cos(r), np.sin(r)
+    rotation_matrix = np.array([
+        [cos_r, -sin_r, 0],
+        [sin_r, cos_r, 0],
+        [0, 0, 1]
+    ])
+
+    # Rotate and translate
+    corners_global = corners_local @ rotation_matrix.T
+    corners_global += box[:3]
+    
+    return corners_global
+
+
 def calculate_giou_3d(
     box1: Union[np.ndarray, List[float]],
     box2: Union[np.ndarray, List[float]],
@@ -334,28 +364,31 @@ def calculate_giou_3d(
     
     iou = calculate_iou_3d(box1, box2, box_format)
     
-    # Calculate enclosing box volume
+    # To compute the enclosing box, we need the corners of the boxes
+    corners1 = _get_3d_corners(box1, box_format)
+    corners2 = _get_3d_corners(box2, box_format)
+    
+    all_corners = np.vstack((corners1, corners2))
+    
+    min_coords = np.min(all_corners, axis=0)
+    max_coords = np.max(all_corners, axis=0)
+    
+    enclosing_volume = np.prod(max_coords - min_coords)
+    
+    # Calculate volumes
     if box_format == "xyzwhlr":
-        x1, y1, z1, w1, h1, l1 = box1[:6]
-        x2, y2, z2, w2, h2, l2 = box2[:6]
-    else:
-        x1, y1, z1, h1, w1, l1 = box1[:6]
-        x2, y2, z2, h2, w2, l2 = box2[:6]
+        w1, h1, l1 = box1[3:6]
+        w2, h2, l2 = box2[3:6]
+        volume1 = w1 * h1 * l1
+        volume2 = w2 * h2 * l2
+    else:  # xyzhwlr
+        h1, w1, l1 = box1[3:6]
+        h2, w2, l2 = box2[3:6]
+        volume1 = w1 * h1 * l1
+        volume2 = w2 * h2 * l2
     
-    # Calculate min and max coordinates
-    min_x = min(x1 - w1/2, x2 - w2/2)
-    max_x = max(x1 + w1/2, x2 + w2/2)
-    min_y = min(y1 - l1/2, y2 - l2/2)
-    max_y = max(y1 + l1/2, y2 + l2/2)
-    min_z = min(z1 - h1/2, z2 - h2/2)
-    max_z = max(z1 + h1/2, z2 + h2/2)
+    union = volume1 + volume2 - (iou * (volume1 + volume2) / (1 + iou) if iou > 0 else volume1 + volume2)
     
-    enclosing_volume = (max_x - min_x) * (max_y - min_y) * (max_z - min_z)
-    
-    volume1 = w1 * h1 * l1
-    volume2 = w2 * h2 * l2
-    union = volume1 + volume2 - iou * (volume1 + volume2) / (1 + iou) if iou > 0 else volume1 + volume2
-    
-    giou = iou - (enclosing_volume - union) / enclosing_volume
+    giou = iou - (enclosing_volume - union) / (enclosing_volume + 1e-8)
     
     return float(giou)

@@ -194,6 +194,38 @@ def calculate_tp_metrics(
     }
 
 
+def calculate_per_class_tp_metrics(
+    predictions: List[Dict],
+    ground_truth: List[Dict],
+    class_names: List[str],
+    iou_threshold: float = 0.5
+) -> Dict[str, Dict[str, float]]:
+    """
+    Calculate True Positive error metrics for each class.
+    
+    Args:
+        predictions: List of predictions
+        ground_truth: List of ground truth
+        class_names: List of class names to evaluate
+        iou_threshold: IoU threshold for matching
+    
+    Returns:
+        Dictionary mapping class name to a dictionary of error metrics.
+    """
+    per_class_metrics = {}
+    for cls in class_names:
+        cls_preds = [p for p in predictions if p.get('class') == cls]
+        cls_gt = [g for g in ground_truth if g.get('class') == cls]
+        
+        per_class_metrics[cls] = calculate_tp_metrics(
+            predictions=cls_preds,
+            ground_truth=cls_gt,
+            iou_threshold=iou_threshold
+        )
+        
+    return per_class_metrics
+
+
 def calculate_nds_detailed(
     predictions: List[Dict],
     ground_truth: List[Dict],
@@ -239,19 +271,25 @@ def calculate_nds_detailed(
     nds = (5 * mAP + error_sum) / 10.0
     
     # Per-class NDS
+    per_class_tp_metrics = calculate_per_class_tp_metrics(
+        predictions=predictions,
+        ground_truth=ground_truth,
+        class_names=class_names,
+        iou_threshold=iou_threshold
+    )
+    
     per_class_nds = {}
     for cls in class_names:
-        cls_preds = [p for p in predictions if p.get('class') == cls]
-        cls_gt = [g for g in ground_truth if g.get('class') == cls]
+        ap = map_result['AP_per_class'].get(cls, 0.0)
+        tp_errors = per_class_tp_metrics.get(cls, {})
         
-        if len(cls_gt) > 0:
-            cls_nds = calculate_nds(
-                predictions=cls_preds,
-                ground_truth=cls_gt,
-                class_names=[cls],
-                iou_threshold=iou_threshold
-            )
-            per_class_nds[cls] = cls_nds
+        error_sum = 0.0
+        for metric_name in ['ate', 'ase', 'aoe', 'ave', 'aae']:
+            error = tp_errors.get(metric_name, 1.0)
+            error_sum += (1.0 - min(1.0, error))
+            
+        class_nds = (5 * ap + error_sum) / 10.0
+        per_class_nds[cls] = class_nds
     
     return {
         'nds': float(nds),

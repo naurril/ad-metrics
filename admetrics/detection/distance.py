@@ -250,9 +250,9 @@ def calculate_average_distance_error(
     
     if len(distance_errors) == 0:
         return {
-            'mean_distance_error': 0.0,
-            'median_distance_error': 0.0,
-            'std_distance_error': 0.0,
+            'mean_distance_error': float('nan'),
+            'median_distance_error': float('nan'),
+            'std_distance_error': float('nan'),
             'num_matched': 0
         }
     
@@ -296,6 +296,7 @@ def calculate_translation_error_bins(
     for i in range(len(bins) - 1):
         bin_name = f"{bins[i]}-{bins[i+1]}m"
         bin_results[bin_name] = {'tp': 0, 'fp': 0, 'fn': 0}
+    bin_results[f">{bins[-1]}m"] = {'tp': 0, 'fp': 0, 'fn': 0}
     
     # Sort predictions by score
     predictions = sorted(predictions, key=lambda x: x.get('score', 0), reverse=True)
@@ -324,16 +325,16 @@ def calculate_translation_error_bins(
         # Determine distance bin based on prediction
         pred_dist = np.linalg.norm(pred['box'][:2])  # BEV distance from origin
         
-        bin_idx = None
+        bin_name = None
         for i in range(len(bins) - 1):
             if bins[i] <= pred_dist < bins[i + 1]:
-                bin_idx = i
+                bin_name = f"{bins[i]}-{bins[i+1]}m"
                 break
-        
-        if bin_idx is None:
+        if bin_name is None and pred_dist >= bins[-1]:
+            bin_name = f">{bins[-1]}m"
+
+        if bin_name is None:
             continue
-        
-        bin_name = f"{bins[bin_idx]}-{bins[bin_idx+1]}m"
         
         if max_iou >= iou_threshold and max_gt_idx >= 0:
             bin_results[bin_name]['tp'] += 1
@@ -346,10 +347,15 @@ def calculate_translation_error_bins(
         if not gt_matched[gt_idx]:
             gt_dist = np.linalg.norm(gt['box'][:2])
             
+            bin_name = None
             for i in range(len(bins) - 1):
                 if bins[i] <= gt_dist < bins[i + 1]:
                     bin_name = f"{bins[i]}-{bins[i+1]}m"
-                    bin_results[bin_name]['fn'] += 1
                     break
+            if bin_name is None and gt_dist >= bins[-1]:
+                bin_name = f">{bins[-1]}m"
+
+            if bin_name:
+                bin_results[bin_name]['fn'] += 1
     
     return bin_results

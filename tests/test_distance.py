@@ -271,7 +271,7 @@ class TestAverageDistanceError:
         result = calculate_average_distance_error(predictions, ground_truth)
         
         assert result['num_matched'] == 0
-        assert result['mean_distance_error'] == 0.0
+        assert np.isnan(result['mean_distance_error'])
     
     def test_bev_distance_type(self, matched_data):
         """Test with BEV distance type."""
