@@ -333,4 +333,3 @@ This library implements metrics based on evaluation protocols from:
 
 ---
 
-**Made with ❤️ for the autonomous driving community**
