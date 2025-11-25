@@ -164,14 +164,6 @@ Complete reference of all 105 exported metric calculation interfaces in the `adm
 | 76 | **`calculate_driving_direction_compliance`** | **NEW**: Wrong-way detection (nuPlan) | `trajectory`: np.ndarray (T, 2)<br>`headings`: np.ndarray (T,)<br>`lane_centerline`: np.ndarray (N, 2)<br>`angle_threshold`: float = π/2 | `dict`: {'compliance_score', 'wrong_way_distance', 'wrong_way_rate', 'heading_errors'} | 4 |
 | 77 | **`calculate_interaction_metrics`** | **NEW**: Multi-agent proximity analysis (Waymo) | `ego_trajectory`: np.ndarray (T, 2)<br>`other_objects`: List[np.ndarray]<br>`vehicle_size`: Tuple = (4.5, 2.0)<br>`close_distance_threshold`: float = 5.0 | `dict`: {'min_distance', 'mean_distance_to_nearest', 'distance_to_nearest_per_timestep', 'closest_object_id', 'closest_approach_timestep', 'num_close_interactions'} | 6 |
 
-**Key Updates:**
-- ✅ **5 NEW functions** (57, 68, 72, 73, 74) for advanced planning evaluation
-- ✅ **2 UPDATED functions** (64, 65) with enhanced features and nuPlan mode
-- ✅ Removed backward compatibility (clean API with explicit parameter names)
-- ✅ Industry alignment: nuPlan, Waymo Sim Agents, tuplan_garage
-- ✅ Multi-horizon evaluation, Savitzky-Golay smoothing, at-fault classification
-
----
 
 ### Vector Map Metrics (12)
 
