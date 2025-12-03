@@ -173,11 +173,13 @@ def example_6_comfort_evaluation():
     smooth_traj = np.array([[i**1.5 * 0.5, 0] for i in range(20)])
     smooth_t = np.linspace(0, 5, 20)
     
-    smooth_comfort = calculate_comfort_metrics(smooth_traj, smooth_t, max_acceleration=2.0, max_jerk=2.0)
+    smooth_comfort = calculate_comfort_metrics(
+        smooth_traj, smooth_t, max_longitudinal_accel=2.0, max_jerk=2.0
+    )
     
     print("Smooth Trajectory:")
-    print(f"  Mean acceleration: {smooth_comfort['mean_acceleration']:.3f} m/s²")
-    print(f"  Max acceleration: {smooth_comfort['max_acceleration']:.3f} m/s²")
+    print(f"  Mean longitudinal accel: {smooth_comfort['mean_longitudinal_accel']:.3f} m/s²")
+    print(f"  Max longitudinal accel: {smooth_comfort['max_longitudinal_accel']:.3f} m/s²")
     print(f"  Mean jerk: {smooth_comfort['mean_jerk']:.3f} m/s³")
     print(f"  Max jerk: {smooth_comfort['max_jerk']:.3f} m/s³")
     print(f"  Comfort rate: {smooth_comfort['comfort_rate']:.2%}")
@@ -187,11 +189,13 @@ def example_6_comfort_evaluation():
     aggressive_traj = np.array([[0, 0], [2, 0], [3, 0], [3.5, 0], [3.6, 0], [3.6, 0]])
     aggressive_t = np.array([0.0, 1.0, 2.0, 3.0, 4.0, 5.0])
     
-    aggressive_comfort = calculate_comfort_metrics(aggressive_traj, aggressive_t, max_acceleration=2.0, max_jerk=2.0)
+    aggressive_comfort = calculate_comfort_metrics(
+        aggressive_traj, aggressive_t, max_longitudinal_accel=2.0, max_jerk=2.0
+    )
     
     print(f"\nAggressive Trajectory (with hard braking):")
-    print(f"  Mean acceleration: {aggressive_comfort['mean_acceleration']:.3f} m/s²")
-    print(f"  Max acceleration: {aggressive_comfort['max_acceleration']:.3f} m/s²")
+    print(f"  Mean longitudinal accel: {aggressive_comfort['mean_longitudinal_accel']:.3f} m/s²")
+    print(f"  Max longitudinal accel: {aggressive_comfort['max_longitudinal_accel']:.3f} m/s²")
     print(f"  Comfort rate: {aggressive_comfort['comfort_rate']:.2%}")
     print(f"  Comfort violations: {aggressive_comfort['comfort_violations']}")
 
@@ -350,7 +354,7 @@ def example_9_end_to_end_benchmark():
     print(f"6. Lateral Error: {lateral['mean_lateral_error']:.3f}m (max: {lateral['max_lateral_error']:.3f}m)")
     
     # 7. Comfort
-    comfort = calculate_comfort_metrics(pred_traj, t, max_acceleration=3.0, max_jerk=3.0)
+    comfort = calculate_comfort_metrics(pred_traj, t, max_longitudinal_accel=3.0, max_jerk=3.0)
     print(f"7. Comfort: Rate={comfort['comfort_rate']:.1%}, Violations={comfort['comfort_violations']}")
     
     # 8. Overall score
